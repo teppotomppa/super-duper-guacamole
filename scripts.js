@@ -1,10 +1,42 @@
+/**
+ * Author: Thomas Sihvola
+ * Date: April 4, 2025
+ * Program: Train Location Tracker
+ * Description:
+ * This program creates an interactive map using Leaflet.js to display real-time train locations in Finland.
+ * It fetches train data from the Digitraffic API every 15 seconds and updates the map with markers
+ * representing moving and stopped trains. Users can search for specific trains using a dropdown menu
+ * and zoom in on their locations. The program also handles adding and removing train markers dynamically
+ * based on the latest data.
+ *
+ * Features:
+ * - Real-time train location updates with custom icons for moving and stopped trains.
+ * - Dropdown menu for selecting and searching specific trains.
+ * - Automatic removal of outdated train markers.
+ * - Error handling for API requests and user interactions.
+ *
+ * Dependencies:
+ * - Leaflet.js for map rendering.
+ * - Digitraffic API for train location data.
+ *
+ * Usage:
+ * - Open the HTML file containing this script in a browser.
+ * - Ensure the required assets (e.g., trainMoving.png, trainStopped.png) are in the same directory.
+ * - Interact with the map and dropdown menu to view train locations.
+ */
+
 let map;
 let trainMarkersMap = new Map();
 
-// Create the map and set the initial view to Finland
+/**
+ * Initializes the map and sets up event listeners.
+ * Fetches train data periodically and updates the map.
+ */
 document.addEventListener("DOMContentLoaded", function () {
+  // Create the map and set the initial view to Finland
   map = L.map("map").setView([63, 26], 6);
 
+  // Add OpenStreetMap tiles to the map
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors",
   }).addTo(map);
@@ -39,9 +71,12 @@ var trainStoppedIcon = L.icon({
   iconSize: [35, 35],
 });
 
-// Fetch train data from the API and update the map
+/**
+ * Fetches train data from the Digitraffic API and updates the map.
+ * Adds, updates, or removes train markers based on the latest data.
+ */
 async function fetchData() {
-  const newTrainNumbers = new Set();
+  const newTrainNumbers = new Set(); // Set to track train numbers in the latest data
 
   try {
     const response = await fetch(
@@ -58,6 +93,7 @@ async function fetchData() {
     const currentTime = new Date().toLocaleTimeString();
     console.log(`Data updated at ${currentTime}`);
 
+    // Process each train feature in the GeoJSON data
     geojson.features.forEach((feature) => {
       const coordinates = feature.geometry.coordinates;
       const lat = coordinates[1];
@@ -65,11 +101,13 @@ async function fetchData() {
       const trainNumber = feature.properties.trainNumber;
       const speed = feature.properties.speed;
 
-      newTrainNumbers.add(trainNumber);
+      newTrainNumbers.add(trainNumber); // Track the train number
 
+      // Determine the appropriate icon based on the train's speed
       const icon = speed === 0 ? trainStoppedIcon : trainMovingIcon;
 
       if (trainMarkersMap.has(trainNumber)) {
+        // Update existing marker
         const marker = trainMarkersMap.get(trainNumber);
         marker.setLatLng([lat, lon]);
         marker.setPopupContent(
@@ -77,6 +115,7 @@ async function fetchData() {
         );
         marker.setIcon(icon);
       } else {
+        // Add a new marker for the train
         const marker = L.marker([lat, lon], { icon: icon })
           .addTo(map)
           .bindPopup(
@@ -86,6 +125,7 @@ async function fetchData() {
       }
     });
 
+    // Remove markers for trains that are no longer in the latest data
     trainMarkersMap.forEach((marker, trainNumber) => {
       if (!newTrainNumbers.has(trainNumber)) {
         map.removeLayer(marker);
@@ -96,16 +136,19 @@ async function fetchData() {
     console.error("Error fetching train data:", error);
   }
 
+  // Update the dropdown menu with the latest train numbers
   const dropdown = document.getElementById("trainDropdown");
   dropdown.innerHTML = "";
 
   const sortedTrainNumbers = Array.from(newTrainNumbers).sort((a, b) => a - b);
 
+  // Add a default option to the dropdown
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.text = "Select a train";
   dropdown.appendChild(defaultOption);
 
+  // Add options for each train number
   sortedTrainNumbers.forEach((trainNumber) => {
     const option = document.createElement("option");
     option.value = trainNumber;
@@ -136,7 +179,9 @@ async function fetchData() {
   }
 }
 
-// Search for a specific train by its number and zoom to its location
+/**
+ * Search for a specific train by its number and zoom to its location
+ */
 async function searchTrain(trainNumber) {
   try {
     const response = await fetch(

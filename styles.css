@@ -1,4 +1,21 @@
-/* General styles */
+/*
+Author: Thomas Sihvola
+Date: April 4, 2025
+Program: Train Location Tracker
+Description:
+This CSS file defines the styles for the Train Location Tracker application. It customizes
+the appearance of the map, dropdown menu, and other UI elements to ensure a clean and user-friendly
+interface.
+
+Features:
+- Styles for the Leaflet.js map container.
+- Customizations for dropdown menus and buttons.
+- Responsive design for different screen sizes.
+
+Usage:
+- Link this file in the HTML file to apply the styles.
+*/
+
 html,
 body {
   min-width: 320px; /* Prevent the page from shrinking too much horizontally */
