@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Train Tracker</title>
+  <link rel="icon" href="trainMoving.png" type="image/x-icon" />
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="legend">
+    <h3>Legend & Search</h3>
+    <div>
+      <img src="trainMoving.png" alt="Moving Train Icon" width="35" height="35" />
+      <span>Moving Train</span>
+    </div>
+    <div>
+      <img src="trainStopped.png" alt="Stopped Train Icon" width="35" height="35" />
+      <span>Stopped Train</span>
+    </div>
+    <div id="search">
+      <h4>Search Train</h4>
+      <select id="trainDropdown"></select>
+      <button id="trainSearchButton">Search</button>
+    </div>
+  </div>
+  <footer>
+    Liikennetietojen lähde: Fintraffic / digitraffic.fi, lisenssi CC 4.0 BY |
+    Kartta: Leaflet, Copyright (c) 2010-2023, Vladimir Agafonkin. BSD-2-Clause License |
+    Icons: Stopped train by
+    <a href="https://www.flaticon.com/free-icon/train_1974098?term=train&page=1&position=13&origin=tag&related_id=1974098"
+      title="train icons" target="_blank">
+      Smashicons
+    </a>/ Moving train by
+    <a href="https://www.flaticon.com/free-icon/train_335096?term=train&page=4&position=29&origin=tag&related_id=335096"
+      title="train icons" target="_blank">
+      Creaticca Creative Agency
+    </a> - Flaticon
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="scripts.js"></script>
+</body>
+
+</html>

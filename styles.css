@@ -1,0 +1,200 @@
+/* General styles */
+html,
+body {
+  min-width: 320px; /* Prevent the page from shrinking too much horizontally */
+  min-height: 400px; /* Prevent the page from shrinking too much vertically */
+  overflow: hidden; /* Prevent scrollbars from appearing when the window is too small */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+  min-height: 400px;
+}
+
+/* Header styles */
+h1 {
+  color: #444;
+  text-align: center;
+  margin-top: 20px;
+}
+
+h3 {
+  text-align: center;
+}
+
+/* Paragraph styles */
+p {
+  margin: 10px 20px;
+  font-size: 14px;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  background-color: #000; /* Solid black background */
+  color: #fff; /* White text */
+  font-size: 14px; /* Slightly larger font for better readability */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays above the map */
+  padding: 15px 0; /* Add vertical padding for spacing */
+  line-height: 1.6; /* Add spacing between lines of text */
+}
+
+footer a {
+  color: #00bfff; /* Light blue for links */
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.8; /* Lisää riviväliä */
+  font-size: 14px; /* Pienempi fontti */
+  color: #fff;
+  background-color: rgba(34, 34, 34, 0.8); /* Läpinäkyvä tausta */
+  margin-top: 10px;
+}
+
+#map {
+  height: calc(
+    100vh - 50px
+  ); /* Full height minus the footer height (adjust as needed) */
+  width: 100%; /* Ensure the map takes the full width of the page */
+}
+
+#legend {
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  z-index: 1000; /* Ensure it appears above the map */
+}
+
+#legend h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+#legend div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#legend img {
+  margin-right: 10px;
+}
+
+#search {
+  margin: auto;
+}
+
+#search h4 {
+  margin: auto; /* Add more space below the "Search Train" text */
+  font-size: 16px; /* Optionally increase the font size */
+  font-weight: bold; /* Make the text bold */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+#search input {
+  width: 135px;
+  padding: 8px; /* Increase padding for a larger input box */
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Slightly rounder corners */
+  font-size: 14px; /* Adjust font size for better readability */
+}
+
+#trainDropdown {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+  margin-left: 10px;
+}
+
+#search button {
+  width: 100%;
+  padding: 8px; /* Increase padding for a larger button */
+  background-color: #007bff;
+  margin-left: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px; /* Slightly rounder corners */
+  cursor: pointer;
+  font-size: 14px; /* Adjust font size for better readability */
+}
+
+#search button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  #legend {
+    top: 10px; /* Move the legend closer to the top */
+    left: 10px;
+    width: 90%; /* Make the legend take up more width */
+    font-size: 14px; /* Reduce font size */
+  }
+
+  #map {
+    height: calc(100vh - 70px); /* Adjust map height for smaller screens */
+  }
+
+  footer {
+    font-size: 12px; /* Reduce footer font size */
+    padding: 10px 0; /* Adjust padding */
+  }
+}
+
+/* Styles for very small screens (e.g., narrow phones) */
+@media (max-width: 480px) {
+  #legend {
+    width: 100%; /* Make the legend full width */
+    left: 0; /* Center the legend */
+    padding: 5px; /* Reduce padding */
+  }
+
+  #map {
+    height: calc(100vh - 80px); /* Adjust map height further */
+  }
+
+  footer {
+    font-size: 10px; /* Further reduce footer font size */
+  }
+}
+
+@media (max-width: 320px), (max-height: 320px) {
+  #legend {
+    width: 90%; /* Adjust legend width for very small screens */
+    font-size: 12px; /* Reduce font size */
+  }
+
+  footer {
+    font-size: 10px; /* Reduce footer font size */
+    padding: 5px 0; /* Adjust padding */
+  }
+
+  #map {
+    height: calc(100vh - 50px); /* Adjust map height */
+  }
+}
